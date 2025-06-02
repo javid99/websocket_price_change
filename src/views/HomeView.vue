@@ -51,7 +51,7 @@ export default {
    },
 
    methods: {
-      init_chat() {
+      init_socket() {
          var sockets_bay_url = `wss://stream.bybit.com/v5/public/spot`;
          this.websocket = new WebSocket(sockets_bay_url);
 
@@ -170,7 +170,7 @@ export default {
    async mounted() {
       this.setupChart();
       await this.fetchHistoricalKlineData();
-      this.init_chat();
+      this.init_socket();
    },
 
    beforeUnmount() {
@@ -182,7 +182,7 @@ export default {
    watch: {
       async currency(newVal) {
          this.websocket.close();
-         this.init_chat(newVal);
+         this.init_socket();
          await this.fetchHistoricalKlineData();
       },
    },
